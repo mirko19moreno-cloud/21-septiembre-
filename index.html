@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080706">
+<title>Para ti 🌻</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #080706;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+body {
+    color: #fff;
+}
+
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+========================================================= */
+
+#app {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    background: #080706;
+}
+
+.screen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(1.025);
+    transition:
+        opacity 0.9s ease,
+        transform 1s ease,
+        visibility 0.9s ease;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+/* =========================================================
+   BOTÓN DE MÚSICA
+========================================================= */
+
+#musicButton {
+    position: fixed;
+    top: calc(env(safe-area-inset-top) + 18px);
+    right: 18px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(15,13,11,0.42);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+#musicButton.playing {
+    box-shadow: 0 0 0 5px rgba(255,255,255,0.04);
+}
+
+/* =========================================================
+   ESCENA 1 — RAMO REALISTA
+========================================================= */
+
+#screen1 {
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.10),
+            rgba(0,0,0,0.50)
+        ),
+        url("ramo.jpg") center center / cover no-repeat;
+}
+
+.opening-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.05) 15%,
+            rgba(0,0,0,0.20) 48%,
+            rgba(0,0,0,0.68) 100%
+        );
+}
+
+.opening-content {
+    position: relative;
+    z-index: 2;
+    width: min(88%, 500px);
+    margin-top: 48vh;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.opening-content h1 {
+    margin: 0 auto 30px;
+    max-width: 430px;
+    font-size: clamp(24px, 6.2vw, 34px);
+    line-height: 1.35;
+    font-weight: 400;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.75);
+}
+
+.main-button {
+    border: none;
+    padding: 15px 32px;
+    min-width: 175px;
+    border-radius: 999px;
+    background: rgba(255,213,84,0.96);
+    color: #332300;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    box-shadow:
+        0 8px 28px rgba(0,0,0,0.35),
+        inset 0 1px rgba(255,255,255,0.55);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.main-button:active {
+    transform: scale(0.96);
+}
+
+/* =========================================================
+   ESCENA 2 — EXPLICACIÓN
+========================================================= */
+
+#screen2 {
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(120,78,20,0.17),
+            transparent 55%
+        ),
+        #0b0907;
+}
+
+.explanation {
+    width: min(88%, 460px);
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.explanation .small-flower {
+    font-size: 52px;
+    margin-bottom: 28px;
+    animation: gentleFloat 3s ease-in-out infinite;
+}
+
+.explanation p {
+    margin: 0;
+    font-size: clamp(21px, 5.5vw, 28px);
+    line-height: 1.55;
+    color: #f5eee1;
+}
+
+.explanation .sub {
+    margin-top: 24px;
+    font-size: clamp(16px, 4.3vw, 19px);
+    line-height: 1.5;
+    color: #cfc5b4;
+}
+
+.explanation button {
+    margin-top: 36px;
+}
+
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* =========================================================
+   ESCENA 3 — CINCO FLORES
+========================================================= */
+
+#screen3 {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(113,75,15,0.16),
+            transparent 60%
+        ),
+        #090806;
+    overflow: hidden;
+}
+
+.flowers-scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:
+        calc(env(safe-area-inset-top) + 25px)
+        18px
+        calc(env(safe-area-inset-bottom) + 25px);
+}
+
+.flowers-title {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #f5eee1;
+}
+
+.flowers-title h2 {
+    margin: 0 0 10px;
+    font-size: clamp(22px, 6vw, 30px);
+    font-weight: 400;
+}
+
+.flowers-title p {
+    margin: 0;
+    font-size: 16px;
+    color: #c9bdab;
+}
+
+.flowers-grid {
+    width: min(94%, 430px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px 18px;
+    justify-items: center;
+}
+
+.flower-item {
+    position: relative;
+    width: 92px;
+    height: 115px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.flower-item:nth-child(4) {
+    grid-column: 1 / 2;
+    margin-left: 52px;
+}
+
+.flower-item:nth-child(5) {
+    grid-column: 3 / 4;
+    margin-right: 52px;
+}
+
+.flower-head {
+    position: absolute;
+    top: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle, #6e4311 0 19%, transparent 20%),
+        repeating-conic-gradient(
+            from 0deg,
+            #ffd83d 0deg 13deg,
+            #f6bd20 13deg 25deg
+        );
+    box-shadow:
+        0 0 18px rgba(255,203,45,0.16);
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
+}
+
+.flower-item:active .flower-head {
+    transform: scale(0.92);
+}
+
+.flower-item.opened .flower-head {
+    filter: brightness(1.13);
+    transform: scale(1.06);
+}
+
+.flower-stem {
+    position: absolute;
+    top: 56px;
+    width: 5px;
+    height: 58px;
+    border-radius: 8px;
+    background: linear-gradient(to right, #375a2a, #658a43, #375a2a);
+}
+
+.flower-leaf {
+    position: absolute;
+    top: 77px;
+    width: 25px;
+    height: 13px;
+    background: #55773a;
+    border-radius: 100% 0 100% 0;
+}
+
+.flower-leaf.left {
+    transform: rotate(25deg);
+    left: 23px;
+}
+
+.flower-leaf.right {
+    transform: rotate(155deg);
+    right: 23px;
+}
+
+.flower-message {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: min(84%, 360px);
+    transform: translate(-50%, -45%) scale(0.92);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 50;
+    background: rgba(247,238,215,0.98);
+    color: #382b1c;
+    padding: 30px 25px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        visibility 0.35s ease;
+}
+
+.flower-message.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.flower-message p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.close-message {
+    margin-top: 22px;
+    border: none;
+    background: transparent;
+    color: #79571e;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.all-flowers-message {
+    margin-top: 28px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: 0.5s ease;
+}
+
+.all-flowers-message.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.all-flowers-message p {
+    margin: 0 0 15px;
+    color: #e7ddcc;
+    font-size: 16px;
+}
+
+.all-flowers-message button {
+    border: none;
+    background: transparent;
+    color: #ffd34d;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+/* =========================================================
+   ESCENA 4 — SOBRE CERRADO / CARTA
+========================================================= */
+
+#screen4 {
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(133,88,20,0.17),
+            transparent 58%
+        ),
+        #080706;
+    overflow: hidden;
+}
+
+/* Contenedor de la escena final */
+.final-scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:
+        calc(env(safe-area-inset-top) + 20px)
+        18px
+        calc(env(safe-area-inset-bottom) + 20px);
+}
+
+/* =========================================================
+   PÉTALOS
+========================================================= */
+
+#petalContainer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.petal {
+    position: absolute;
+    top: -45px;
+    width: 13px;
+    height: 20px;
+    border-radius: 70% 30% 70% 30%;
+    background: linear-gradient(
+        135deg,
+        #ffe76a,
+        #f2bd25
+    );
+    opacity: 0.88;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+    animation-name: petalFall;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes petalFall {
+    0% {
+        transform:
+            translate3d(0, -40px, 0)
+            rotate(0deg);
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 0.88;
+    }
+
+    45% {
+        transform:
+            translate3d(var(--sway1), 48vh, 0)
+            rotate(190deg);
+    }
+
+    75% {
+        transform:
+            translate3d(var(--sway2), 76vh, 0)
+            rotate(300deg);
+    }
+
+    100% {
+        transform:
+            translate3d(var(--sway3), 110vh, 0)
+            rotate(440deg);
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   SOBRE
+========================================================= */
+
+.envelope-stage {
+    position: relative;
+    z-index: 25;
+    width: min(88vw, 370px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.envelope-stage.hidden {
+    opacity: 0;
+    transform: scale(0.92);
+    pointer-events: none;
+}
+
+.envelope-intro {
+    text-align: center;
+    color: #e9deca;
+    font-size: clamp(18px, 4.8vw, 22px);
+    margin-bottom: 27px;
+    line-height: 1.45;
+    max-width: 330px;
+}
+
+/*
+   El sobre está construido como un elemento visual,
+   pero NO contiene todavía la carta abierta.
+*/
+.envelope {
+    position: relative;
+    width: min(82vw, 330px);
+    aspect-ratio: 1.45 / 1;
+    cursor: pointer;
+    perspective: 1000px;
+    filter: drop-shadow(0 18px 28px rgba(0,0,0,0.45));
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background:
+        linear-gradient(
+            145deg,
+            #e8c978,
+            #f3dda1 45%,
+            #d9b75e
+        );
+    overflow: hidden;
+}
+
+/* Triángulo inferior izquierdo */
+.envelope-back::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 100% 50%;
+    border-color: transparent transparent rgba(192,148,54,0.34) transparent;
+}
+
+/* Triángulo inferior derecho */
+.envelope-back::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 100% 0 0 50%;
+    border-color: transparent transparent transparent rgba(255,239,181,0.42);
+}
+
+/* Solapa */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 62%;
+    background:
+        linear-gradient(
+            145deg,
+            #f5dfa0,
+            #dfbd67
+        );
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition:
+        transform 1s cubic-bezier(.2,.75,.25,1);
+    z-index: 5;
+}
+
+/* Sello */
+.wax-seal {
+    position: absolute;
+    z-index: 8;
+    left: 50%;
+    top: 49%;
+    width: 48px;
+    height: 48px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #f4d95a,
+            #d59d19 70%,
+            #a97108
+        );
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.22),
+        inset 0 2px 3px rgba(255,255,255,0.32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff1a8;
+    font-size: 20px;
+    transition:
+        opacity 0.45s ease,
+        transform 0.45s ease;
+}
+
+.envelope.opening .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.opening .wax-seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+}
+
+/* Botón de abrir */
+.open-letter-button {
+    margin-top: 28px;
+    border: 1px solid rgba(255,218,100,0.42);
+    background: rgba(255,215,89,0.12);
+    color: #f8df8b;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.open-letter-button:active {
+    transform: scale(0.96);
+}
+
+/* =========================================================
+   CARTA ABIERTA
+========================================================= */
+
+.opened-letter {
+    position: absolute;
+    z-index: 35;
+    left: 50%;
+    top: 50%;
+    width: min(88vw, 570px);
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+    transform: translate(-50%, -46%) scale(0.88);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(255,255,255,0.38),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #f6ecd1,
+            #eadbb8
+        );
+
+    color: #392d20;
+    border-radius: 10px;
+    border: 1px solid rgba(115,83,35,0.25);
+
+    padding:
+        31px
+        25px
+        30px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.55),
+        inset 0 0 25px rgba(125,91,39,0.08);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(.2,.8,.2,1),
+        visibility 0.8s ease;
+}
+
+.opened-letter.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.letter-top {
+    text-align: center;
+    font-size: 29px;
+    margin-bottom: 22px;
+}
+
+.letter-content p {
+    margin: 0 0 23px;
+    font-size: clamp(17px, 4.5vw, 21px);
+    line-height: 1.62;
+}
+
+.letter-content .birthday {
+    margin-top: 25px;
+    margin-bottom: 23px;
+    text-align: center;
+    font-weight: bold;
+    font-size: clamp(20px, 5.2vw, 25px);
+}
+
+.final-love {
+    text-align: center;
+    font-size: clamp(20px, 5.2vw, 25px);
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(90,65,30,0.17);
+    font-style: italic;
+}
+
+/* =========================================================
+   RESPONSIVE IPHONE
+========================================================= */
+
+@media (max-width: 390px) {
+
+    .opening-content {
+        margin-top: 50vh;
+    }
+
+    .flowers-grid {
+        gap: 22px 10px;
+    }
+
+    .flower-item {
+        transform: scale(0.92);
+    }
+
+    .flower-item:nth-child(4) {
+        margin-left: 35px;
+    }
+
+    .flower-item:nth-child(5) {
+        margin-right: 35px;
+    }
+
+    .opened-letter {
+        padding:
+            25px
+            20px
+            25px;
+        max-height: calc(100dvh - 34px);
+    }
+
+    .letter-content p {
+        margin-bottom: 19px;
+        line-height: 1.55;
+    }
+}
+
+@media (min-height: 800px) and (max-width: 500px) {
+    .opening-content {
+        margin-top: 47vh;
+    }
+}
+
+/* Evita que el texto quede seleccionado al tocar */
+button,
+.envelope,
+.flower-item {
+    user-select: none;
+    -webkit-user-select: none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+    <!-- =====================================================
+         MÚSICA
+    ====================================================== -->
+
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicButton" aria-label="Música">♫</button>
+
+
+    <!-- =====================================================
+         ESCENA 1
+    ====================================================== -->
+
+    <section class="screen active" id="screen1">
+
+        <div class="opening-overlay"></div>
+
+        <div class="opening-content">
+
+            <h1>
+                Aunque este año no puedo enviarte
+                las flores amarillas, quería que
+                al menos tuvieras las tuyas...
+            </h1>
+
+            <button class="main-button" id="startButton">
+                Sigue 🌻
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ESCENA 2
+    ====================================================== -->
+
+    <section class="screen" id="screen2">
+
+        <div class="explanation">
+
+            <div class="small-flower">
+                🌻
+            </div>
+
+            <p>
+                Bueno…<br>
+                aunque técnicamente no son flores reales,
+                igual quería tener un detalle contigo.
+            </p>
+
+            <div class="sub">
+                Así que hice algo pequeño para ti.
+            </div>
+
+            <button class="main-button" id="toFlowers">
+                Descúbrelo 🌻
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ESCENA 3
+    ====================================================== -->
+
+    <section class="screen" id="screen3">
+
+        <div class="flowers-scene">
+
+            <div class="flowers-title">
+
+                <h2>
+                    Hay cinco flores para ti 🌻
+                </h2>
+
+                <p>
+                    Toca aquí ☝🏼
+                </p>
+
+            </div>
+
+
+            <div class="flowers-grid">
+
+                <!-- Flor 1 -->
+                <div class="flower-item"
+                     data-message="Que sigas sonriendo incluso en los días difíciles.">
+
+                    <div class="flower-head"></div>
+                    <div class="flower-stem"></div>
+                    <div class="flower-leaf left"></div>
+                    <div class="flower-leaf right"></div>
+
+                </div>
+
+
+                <!-- Flor 2 -->
+                <div class="flower-item"
+                     data-message="Que sigas cumpliendo cada uno de tus sueños.">
+
+                    <div class="flower-head"></div>
+                    <div class="flower-stem"></div>
+                    <div class="flower-leaf left"></div>
+                    <div class="flower-leaf right"></div>
+
+                </div>
+
+
+                <!-- Flor 3 -->
+                <div class="flower-item"
+                     data-message="Que nunca dejes de luchar por lo que quieres.">
+
+                    <div class="flower-head"></div>
+                    <div class="flower-stem"></div>
+                    <div class="flower-leaf left"></div>
+                    <div class="flower-leaf right"></div>
+
+                </div>
+
+
+                <!-- Flor 4 -->
+                <div class="flower-item"
+                     data-message="Que te vaya bonito en todo lo que venga.">
+
+                    <div class="flower-head"></div>
+                    <div class="flower-stem"></div>
+                    <div class="flower-leaf left"></div>
+                    <div class="flower-leaf right"></div>
+
+                </div>
+
+
+                <!-- Flor 5 -->
+                <div class="flower-item"
+                     data-message="Que nunca olvides lo valiosa que eres.">
+
+                    <div class="flower-head"></div>
+                    <div class="flower-stem"></div>
+                    <div class="flower-leaf left"></div>
+                    <div class="flower-leaf right"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="all-flowers-message" id="allFlowersMessage">
+
+                <p>
+                    Has descubierto todas tus flores. ♡
+                </p>
+
+                <button id="toFinal">
+                    Una última cosa 🌻
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Ventana de mensaje de cada flor -->
+
+        <div class="flower-message" id="flowerMessage">
+
+            <p id="flowerMessageText"></p>
+
+            <button class="close-message" id="closeFlowerMessage">
+                Cerrar
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ESCENA 4 — SOBRE CERRADO
+    ====================================================== -->
+
+    <section class="screen" id="screen4">
+
+        <div class="final-scene">
+
+            <!-- Pétalos continuos -->
+            <div id="petalContainer"></div>
+
+
+            <!-- SOBRE CERRADO -->
+
+            <div class="envelope-stage" id="envelopeStage">
+
+                <div class="envelope-intro">
+                    Hay una última cosa para ti...
+                </div>
+
+
+                <div class="envelope" id="finalEnvelope">
+
+                    <div class="envelope-back"></div>
+
+                    <div class="envelope-flap"></div>
+
+                    <div class="wax-seal">
+                        ♡
+                    </div>
+
+                </div>
+
+
+                <button class="open-letter-button" id="openLetterButton">
+                    Abrir carta ♡
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 CARTA ABIERTA
+            ================================================== -->
+
+            <article class="opened-letter" id="openedLetter">
+
+                <div class="letter-top">
+                    🌻
+                </div>
+
+                <div class="letter-content">
+
+                    <p>
+                        No sé si estas flores virtuales podrán
+                        compararse con las reales, pero de corazón
+                        espero que te hagan feliz.
+                    </p>
+
+                    <p>
+                        Gracias por ser tú, por tu fuerza, por tu
+                        forma de ver la vida y por todo lo bonito
+                        que aportas.
+                    </p>
+
+                    <p>
+                        Aunque la distancia sea un reto, siempre
+                        buscaré una manera de hacerte sentir
+                        especial.
+                    </p>
+
+                    <p class="birthday">
+                        Feliz 21 de septiembre ❤️
+                    </p>
+
+                    <div class="final-love">
+                        Te quiero un millón de mundos ♡
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+/* =========================================================
+   NAVEGACIÓN
+========================================================= */
+
+const screens = [
+    document.getElementById("screen1"),
+    document.getElementById("screen2"),
+    document.getElementById("screen3"),
+    document.getElementById("screen4")
+];
+
+let currentScreen = 0;
+
+function goToScreen(number) {
+
+    screens.forEach((screen, index) => {
+
+        if (index === number) {
+            screen.classList.add("active");
+        } else {
+            screen.classList.remove("active");
+        }
+
+    });
+
+    currentScreen = number;
+
+    /* La escena final comienza inmediatamente
+       con los pétalos cayendo */
+    if (number === 3) {
+        startPetals();
+    }
+}
+
+
+/* =========================================================
+   MÚSICA
+========================================================= */
+
+const music = document.getElementById("backgroundMusic");
+const musicButton = document.getElementById("musicButton");
+
+let musicStarted = false;
+
+async function startMusic() {
+
+    if (musicStarted) return;
+
+    try {
+
+        music.volume = 0;
+
+        await music.play();
+
+        musicStarted = true;
+        musicButton.classList.add("playing");
+
+        let volume = 0;
+
+        const fade = setInterval(() => {
+
+            volume += 0.02;
+
+            if (volume >= 0.32) {
+                volume = 0.32;
+                clearInterval(fade);
+            }
+
+            music.volume = volume;
+
+        }, 70);
+
+    } catch (error) {
+        /* Safari/iPhone puede bloquear la reproducción.
+           Se intentará nuevamente en otra interacción. */
+    }
+}
+
+
+musicButton.addEventListener("click", async () => {
+
+    if (music.paused) {
+
+        try {
+            await music.play();
+            musicButton.classList.add("playing");
+        } catch (error) {}
+
+    } else {
+
+        music.pause();
+        musicButton.classList.remove("playing");
+
+    }
+
+});
+
+
+/* =========================================================
+   BOTONES DE LAS ESCENAS
+========================================================= */
+
+document.getElementById("startButton").addEventListener("click", () => {
+
+    startMusic();
+
+    setTimeout(() => {
+        goToScreen(1);
+    }, 250);
+
+});
+
+
+document.getElementById("toFlowers").addEventListener("click", () => {
+
+    goToScreen(2);
+
+});
+
+
+/* =========================================================
+   CINCO FLORES
+========================================================= */
+
+const flowerItems = document.querySelectorAll(".flower-item");
+const flowerMessage = document.getElementById("flowerMessage");
+const flowerMessageText = document.getElementById("flowerMessageText");
+const closeFlowerMessage = document.getElementById("closeFlowerMessage");
+const allFlowersMessage = document.getElementById("allFlowersMessage");
+
+let discoveredFlowers = 0;
+
+
+flowerItems.forEach((flower) => {
+
+    flower.addEventListener("click", () => {
+
+        const message = flower.dataset.message;
+
+        flowerMessageText.textContent = message;
+
+        flowerMessage.classList.add("visible");
+
+        if (!flower.classList.contains("opened")) {
+
+            flower.classList.add("opened");
+
+            discoveredFlowers++;
+
+            if (discoveredFlowers === flowerItems.length) {
+
+                setTimeout(() => {
+                    allFlowersMessage.classList.add("show");
+                }, 350);
+
+            }
+
+        }
+
+    });
+
+});
+
+
+closeFlowerMessage.addEventListener("click", () => {
+
+    flowerMessage.classList.remove("visible");
+
+});
+
+
+document.getElementById("toFinal").addEventListener("click", () => {
+
+    goToScreen(3);
+
+});
+
+
+/* =========================================================
+   PÉTALOS — CAÍDA CONTINUA Y SUAVE
+========================================================= */
+
+const petalContainer = document.getElementById("petalContainer");
+
+let petalsStarted = false;
+let petalInterval = null;
+
+
+function createPetal() {
+
+    /* Solo creamos pétalos mientras la escena final
+       esté activa */
+
+    if (!screens[3].classList.contains("active")) {
+        return;
+    }
+
+    const petal = document.createElement("div");
+
+    petal.className = "petal";
+
+    const startX = Math.random() * 100;
+
+    const sway1 = (Math.random() * 120 - 60) + "px";
+    const sway2 = (Math.random() * 180 - 90) + "px";
+    const sway3 = (Math.random() * 240 - 120) + "px";
+
+    const duration = 7 + Math.random() * 5;
+    const delay = Math.random() * 0.4;
+
+    const size = 0.65 + Math.random() * 0.8;
+
+    petal.style.left = startX + "%";
+    petal.style.width = (13 * size) + "px";
+    petal.style.height = (20 * size) + "px";
+
+    petal.style.setProperty("--sway1", sway1);
+    petal.style.setProperty("--sway2", sway2);
+    petal.style.setProperty("--sway3", sway3);
+
+    petal.style.animationDuration = duration + "s";
+    petal.style.animationDelay = delay + "s";
+
+    petalContainer.appendChild(petal);
+
+    setTimeout(() => {
+
+        if (petal.parentNode) {
+            petal.remove();
+        }
+
+    }, (duration + delay + 1) * 1000);
+
+}
+
+
+function startPetals() {
+
+    if (petalsStarted) return;
+
+    petalsStarted = true;
+
+    /* Un pequeño grupo inicial */
+    for (let i = 0; i < 7; i++) {
+        setTimeout(() => {
+            createPetal();
+        }, i * 180);
+    }
+
+    /* Después siguen cayendo poco a poco */
+    petalInterval = setInterval(() => {
+
+        createPetal();
+
+        /* A veces cae un segundo pétalo para que
+           la caída no parezca mecánica */
+        if (Math.random() > 0.72) {
+            setTimeout(createPetal, 250);
+        }
+
+    }, 650);
+
+}
+
+
+/* =========================================================
+   ABRIR LA CARTA
+========================================================= */
+
+const finalEnvelope = document.getElementById("finalEnvelope");
+const openLetterButton = document.getElementById("openLetterButton");
+const envelopeStage = document.getElementById("envelopeStage");
+const openedLetter = document.getElementById("openedLetter");
+
+let letterOpened = false;
+
+
+function openFinalLetter() {
+
+    if (letterOpened) return;
+
+    letterOpened = true;
+
+    /* Primero se abre el sobre */
+    finalEnvelope.classList.add("opening");
+
+    /* Después de la animación del sobre,
+       aparece la carta */
+    setTimeout(() => {
+
+        envelopeStage.classList.add("hidden");
+
+    }, 650);
+
+
+    setTimeout(() => {
+
+        openedLetter.classList.add("show");
+
+    }, 1050);
+
+}
+
+
+/* Se puede abrir tocando el sobre */
+finalEnvelope.addEventListener("click", openFinalLetter);
+
+
+/* O pulsando el botón */
+openLetterButton.addEventListener("click", openFinalLetter);
+
+
+/* =========================================================
+   PREVENCIÓN DE SCROLL ACCIDENTAL
+========================================================= */
+
+document.addEventListener("touchmove", (event) => {
+
+    if (
+        event.target.closest(".opened-letter") === null &&
+        event.target.closest(".flower-message") === null
+    ) {
+        event.preventDefault();
+    }
+
+}, { passive: false });
+
+
+/* =========================================================
+   INICIO
+========================================================= */
+
+goToScreen(0);
+
+</script>
+
+</body>
+</html>
